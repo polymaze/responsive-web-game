@@ -17,6 +17,7 @@ https://github.com/tzuryby/jquery.hotkeys
 
 /**** Sources & Thanks ****/
  
+  http://www.piskelapp.com/
   https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/getContext
   http://h3manth.com/content/html5-canvas-full-screen-and-full-page
   http://www.lostdecadegames.com/how-to-make-a-simple-html5-canvas-game/
@@ -25,3 +26,6 @@ https://github.com/tzuryby/jquery.hotkeys
   https://css-tricks.com/using-requestanimationframe/
   http://browsenpm.org/package.json
   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
+  http://www.gitguys.com/topics/adding-and-removing-remote-branches/
+  http://stackoverflow.com/questions/9152224/add-canvas-to-a-page-with-javascript
+  
