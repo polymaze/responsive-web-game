@@ -25,3 +25,6 @@ https://github.com/tzuryby/jquery.hotkeys
   https://css-tricks.com/using-requestanimationframe/
   http://browsenpm.org/package.json
   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
+  http://www.gitguys.com/topics/adding-and-removing-remote-branches/
+  http://stackoverflow.com/questions/9152224/add-canvas-to-a-page-with-javascript
+  
