@@ -1,42 +1,12 @@
-https://responsive-web-game.herokuapp.com/
-https://github.com/polymaze/responsive-web-game.git
+/**** WELCOME ****/
 
-# node-js-getting-started
+  This is our responsive web game. Let's play!
 
-A barebones Node.js app using [Express 4](http://expressjs.com/).
 
-This application supports the [Getting Started with Node on Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs) article - check it out.
-
-## Running Locally
-
-Make sure you have [Node.js](http://nodejs.org/) and the [Heroku Toolbelt](https://toolbelt.heroku.com/) installed.
-
-```sh
-$ git clone git@github.com:heroku/node-js-getting-started.git # or clone your own fork
-$ cd node-js-getting-started
-$ npm install
-$ npm start
-```
-
-Your app should now be running on [localhost:5000](http://localhost:5000/).
-
-## Deploying to Heroku
-
-```
-$ heroku create
-$ git push heroku master
-$ heroku open
-```
-or
-
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
-
-## Documentation
-
-For more information about using Node.js on Heroku, see these Dev Center articles:
-
-- [Getting Started with Node.js on Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs)
-- [Heroku Node.js Support](https://devcenter.heroku.com/articles/nodejs-support)
-- [Node.js on Heroku](https://devcenter.heroku.com/categories/nodejs)
-- [Best Practices for Node.js Development](https://devcenter.heroku.com/articles/node-best-practices)
-- [Using WebSockets on Heroku with Node.js](https://devcenter.heroku.com/articles/node-websockets)
+/**** Sources & Thanks ****/
+ 
+  https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/getContext
+  http://h3manth.com/content/html5-canvas-full-screen-and-full-page
+  http://www.lostdecadegames.com/how-to-make-a-simple-html5-canvas-game/
+  http://www.html5rocks.com/en/tutorials/casestudies/onslaught/#toc-the-game-loop
+  http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/

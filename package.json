@@ -1,7 +1,7 @@
 {
-  "name": "gentle-taiga",
+  "name": "responsive-web-game",
   "version": "0.0.1",
-  "description": "A sample Node.js app using Express 4",
+  "description": "Our responsive web game.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
@@ -15,12 +15,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/heroku/node-js-getting-started"
+    "url": "https://github.com/polymaze/responsive-web-game.git"
   },
   "keywords": [
-    "node",
-    "heroku",
-    "express"
+    "html5",
+    "canvas",
+    "game"
   ],
   "license": "MIT"
 }
