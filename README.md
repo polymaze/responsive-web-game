@@ -10,3 +10,4 @@
   http://www.lostdecadegames.com/how-to-make-a-simple-html5-canvas-game/
   http://www.html5rocks.com/en/tutorials/casestudies/onslaught/#toc-the-game-loop
   http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/
+  https://css-tricks.com/using-requestanimationframe/

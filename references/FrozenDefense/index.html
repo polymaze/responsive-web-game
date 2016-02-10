@@ -1,0 +1,708 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!--[if IE]><script type="text/javascript" src="excanvas.compiled.js"></script><![endif]-->
+<script language="javascript" type="application/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script language="javascript" type="application/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js"></script>
+<script type="application/javascript">
+function utf8_encode ( argString ) {
+    // Encodes an ISO-8859-1 string to UTF-8  
+    // 
+    // version: 1008.1718
+    // discuss at: http://phpjs.org/functions/utf8_encode
+    // +   original by: Webtoolkit.info (http://www.webtoolkit.info/)
+    // +   improved by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+    // +   improved by: sowberry
+    // +    tweaked by: Jack
+    // +   bugfixed by: Onno Marsman
+    // +   improved by: Yves Sucaet
+    // +   bugfixed by: Onno Marsman
+    // +   bugfixed by: Ulrich
+    // *     example 1: utf8_encode('Kevin van Zonneveld');
+    // *     returns 1: 'Kevin van Zonneveld'
+    var string = (argString+''); // .replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+ 
+    var utftext = "";
+    var start, end;
+    var stringl = 0;
+ 
+    start = end = 0;
+    stringl = string.length;
+    for (var n = 0; n < stringl; n++) {
+        var c1 = string.charCodeAt(n);
+        var enc = null;
+ 
+        if (c1 < 128) {
+            end++;
+        } else if (c1 > 127 && c1 < 2048) {
+            enc = String.fromCharCode((c1 >> 6) | 192) + String.fromCharCode((c1 & 63) | 128);
+        } else {
+            enc = String.fromCharCode((c1 >> 12) | 224) + String.fromCharCode(((c1 >> 6) & 63) | 128) + String.fromCharCode((c1 & 63) | 128);
+        }
+        if (enc !== null) {
+            if (end > start) {
+                utftext += string.substring(start, end);
+            }
+            utftext += enc;
+            start = end = n+1;
+        }
+    }
+ 
+    if (end > start) {
+        utftext += string.substring(start, string.length);
+    }
+ 
+    return utftext;
+}
+function crc32 ( str ) {
+    // Calculate the crc32 polynomial of a string  
+    // 
+    // version: 1008.1718
+    // discuss at: http://phpjs.org/functions/crc32
+    // +   original by: Webtoolkit.info (http://www.webtoolkit.info/)
+    // +   improved by: T0bsn
+    // -    depends on: utf8_encode
+    // *     example 1: crc32('Kevin van Zonneveld');
+    // *     returns 1: 1249991249
+    str = this.utf8_encode(str);
+    var table = "00000000 77073096 EE0E612C 990951BA 076DC419 706AF48F E963A535 9E6495A3 0EDB8832 79DCB8A4 E0D5E91E 97D2D988 09B64C2B 7EB17CBD E7B82D07 90BF1D91 1DB71064 6AB020F2 F3B97148 84BE41DE 1ADAD47D 6DDDE4EB F4D4B551 83D385C7 136C9856 646BA8C0 FD62F97A 8A65C9EC 14015C4F 63066CD9 FA0F3D63 8D080DF5 3B6E20C8 4C69105E D56041E4 A2677172 3C03E4D1 4B04D447 D20D85FD A50AB56B 35B5A8FA 42B2986C DBBBC9D6 ACBCF940 32D86CE3 45DF5C75 DCD60DCF ABD13D59 26D930AC 51DE003A C8D75180 BFD06116 21B4F4B5 56B3C423 CFBA9599 B8BDA50F 2802B89E 5F058808 C60CD9B2 B10BE924 2F6F7C87 58684C11 C1611DAB B6662D3D 76DC4190 01DB7106 98D220BC EFD5102A 71B18589 06B6B51F 9FBFE4A5 E8B8D433 7807C9A2 0F00F934 9609A88E E10E9818 7F6A0DBB 086D3D2D 91646C97 E6635C01 6B6B51F4 1C6C6162 856530D8 F262004E 6C0695ED 1B01A57B 8208F4C1 F50FC457 65B0D9C6 12B7E950 8BBEB8EA FCB9887C 62DD1DDF 15DA2D49 8CD37CF3 FBD44C65 4DB26158 3AB551CE A3BC0074 D4BB30E2 4ADFA541 3DD895D7 A4D1C46D D3D6F4FB 4369E96A 346ED9FC AD678846 DA60B8D0 44042D73 33031DE5 AA0A4C5F DD0D7CC9 5005713C 270241AA BE0B1010 C90C2086 5768B525 206F85B3 B966D409 CE61E49F 5EDEF90E 29D9C998 B0D09822 C7D7A8B4 59B33D17 2EB40D81 B7BD5C3B C0BA6CAD EDB88320 9ABFB3B6 03B6E20C 74B1D29A EAD54739 9DD277AF 04DB2615 73DC1683 E3630B12 94643B84 0D6D6A3E 7A6A5AA8 E40ECF0B 9309FF9D 0A00AE27 7D079EB1 F00F9344 8708A3D2 1E01F268 6906C2FE F762575D 806567CB 196C3671 6E6B06E7 FED41B76 89D32BE0 10DA7A5A 67DD4ACC F9B9DF6F 8EBEEFF9 17B7BE43 60B08ED5 D6D6A3E8 A1D1937E 38D8C2C4 4FDFF252 D1BB67F1 A6BC5767 3FB506DD 48B2364B D80D2BDA AF0A1B4C 36034AF6 41047A60 DF60EFC3 A867DF55 316E8EEF 4669BE79 CB61B38C BC66831A 256FD2A0 5268E236 CC0C7795 BB0B4703 220216B9 5505262F C5BA3BBE B2BD0B28 2BB45A92 5CB36A04 C2D7FFA7 B5D0CF31 2CD99E8B 5BDEAE1D 9B64C2B0 EC63F226 756AA39C 026D930A 9C0906A9 EB0E363F 72076785 05005713 95BF4A82 E2B87A14 7BB12BAE 0CB61B38 92D28E9B E5D5BE0D 7CDCEFB7 0BDBDF21 86D3D2D4 F1D4E242 68DDB3F8 1FDA836E 81BE16CD F6B9265B 6FB077E1 18B74777 88085AE6 FF0F6A70 66063BCA 11010B5C 8F659EFF F862AE69 616BFFD3 166CCF45 A00AE278 D70DD2EE 4E048354 3903B3C2 A7672661 D06016F7 4969474D 3E6E77DB AED16A4A D9D65ADC 40DF0B66 37D83BF0 A9BCAE53 DEBB9EC5 47B2CF7F 30B5FFE9 BDBDF21C CABAC28A 53B39330 24B4A3A6 BAD03605 CDD70693 54DE5729 23D967BF B3667A2E C4614AB8 5D681B02 2A6F2B94 B40BBE37 C30C8EA1 5A05DF1B 2D02EF8D";
+ 
+    var crc = 0;
+    var x = 0;
+    var y = 0;
+ 
+    crc = crc ^ (-1);
+    for (var i = 0, iTop = str.length; i < iTop; i++) {
+        y = ( crc ^ str.charCodeAt( i ) ) & 0xFF;
+        x = "0x" + table.substr( y * 9, 8 );
+        crc = ( crc >>> 8 ) ^ x;
+    }
+ 
+    return crc ^ (-1);
+}
+</script>
+<script type="application/javascript">
+/*jslint browser: true */ /*global jQuery: true */
+
+/**
+ * jQuery Cookie plugin
+ *
+ * Copyright (c) 2010 Klaus Hartl (stilbuero.de)
+ * Dual licensed under the MIT and GPL licenses:
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.gnu.org/licenses/gpl.html
+ *
+ */
+
+// TODO JsDoc
+
+/**
+ * Create a cookie with the given key and value and other optional parameters.
+ *
+ * @example $.cookie('the_cookie', 'the_value');
+ * @desc Set the value of a cookie.
+ * @example $.cookie('the_cookie', 'the_value', { expires: 7, path: '/', domain: 'jquery.com', secure: true });
+ * @desc Create a cookie with all available options.
+ * @example $.cookie('the_cookie', 'the_value');
+ * @desc Create a session cookie.
+ * @example $.cookie('the_cookie', null);
+ * @desc Delete a cookie by passing null as value. Keep in mind that you have to use the same path and domain
+ *       used when the cookie was set.
+ *
+ * @param String key The key of the cookie.
+ * @param String value The value of the cookie.
+ * @param Object options An object literal containing key/value pairs to provide optional cookie attributes.
+ * @option Number|Date expires Either an integer specifying the expiration date from now on in days or a Date object.
+ *                             If a negative value is specified (e.g. a date in the past), the cookie will be deleted.
+ *                             If set to null or omitted, the cookie will be a session cookie and will not be retained
+ *                             when the the browser exits.
+ * @option String path The value of the path atribute of the cookie (default: path of page that created the cookie).
+ * @option String domain The value of the domain attribute of the cookie (default: domain of page that created the cookie).
+ * @option Boolean secure If true, the secure attribute of the cookie will be set and the cookie transmission will
+ *                        require a secure protocol (like HTTPS).
+ * @type undefined
+ *
+ * @name $.cookie
+ * @cat Plugins/Cookie
+ * @author Klaus Hartl/klaus.hartl@stilbuero.de
+ */
+
+/**
+ * Get the value of a cookie with the given key.
+ *
+ * @example $.cookie('the_cookie');
+ * @desc Get the value of a cookie.
+ *
+ * @param String key The key of the cookie.
+ * @return The value of the cookie.
+ * @type String
+ *
+ * @name $.cookie
+ * @cat Plugins/Cookie
+ * @author Klaus Hartl/klaus.hartl@stilbuero.de
+ */
+jQuery.cookie = function (key, value, options) {
+
+    // key and value given, set cookie...
+    if (arguments.length > 1 && (value === null || typeof value !== "object")) {
+        options = jQuery.extend({}, options);
+
+        if (value === null) {
+            options.expires = -1;
+        }
+
+        if (typeof options.expires === 'number') {
+            var days = options.expires, t = options.expires = new Date();
+            t.setDate(t.getDate() + days);
+        }
+
+        return (document.cookie = [
+            encodeURIComponent(key), '=',
+            options.raw ? String(value) : encodeURIComponent(String(value)),
+            options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+            options.path ? '; path=' + options.path : '',
+            options.domain ? '; domain=' + options.domain : '',
+            options.secure ? '; secure' : ''
+        ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || {};
+    var result, decode = options.raw ? function (s) { return s; } : decodeURIComponent;
+    return (result = new RegExp('(?:^|; )' + encodeURIComponent(key) + '=([^;]*)').exec(document.cookie)) ? decode(result[1]) : null;
+};
+</script>
+<script type="application/javascript">
+/* json2.js 
+ * 2008-01-17
+ * Public Domain
+ * No warranty expressed or implied. Use at your own risk.
+ * See http://www.JSON.org/js.html
+*/
+if(!this.JSON){JSON=function(){function f(n){return n<10?'0'+n:n;}
+Date.prototype.toJSON=function(){return this.getUTCFullYear()+'-'+
+f(this.getUTCMonth()+1)+'-'+
+f(this.getUTCDate())+'T'+
+f(this.getUTCHours())+':'+
+f(this.getUTCMinutes())+':'+
+f(this.getUTCSeconds())+'Z';};var m={'\b':'\\b','\t':'\\t','\n':'\\n','\f':'\\f','\r':'\\r','"':'\\"','\\':'\\\\'};function stringify(value,whitelist){var a,i,k,l,r=/["\\\x00-\x1f\x7f-\x9f]/g,v;switch(typeof value){case'string':return r.test(value)?'"'+value.replace(r,function(a){var c=m[a];if(c){return c;}
+c=a.charCodeAt();return'\\u00'+Math.floor(c/16).toString(16)+
+(c%16).toString(16);})+'"':'"'+value+'"';case'number':return isFinite(value)?String(value):'null';case'boolean':case'null':return String(value);case'object':if(!value){return'null';}
+if(typeof value.toJSON==='function'){return stringify(value.toJSON());}
+a=[];if(typeof value.length==='number'&&!(value.propertyIsEnumerable('length'))){l=value.length;for(i=0;i<l;i+=1){a.push(stringify(value[i],whitelist)||'null');}
+return'['+a.join(',')+']';}
+if(whitelist){l=whitelist.length;for(i=0;i<l;i+=1){k=whitelist[i];if(typeof k==='string'){v=stringify(value[k],whitelist);if(v){a.push(stringify(k)+':'+v);}}}}else{for(k in value){if(typeof k==='string'){v=stringify(value[k],whitelist);if(v){a.push(stringify(k)+':'+v);}}}}
+return'{'+a.join(',')+'}';}}
+return{stringify:stringify,parse:function(text,filter){var j;function walk(k,v){var i,n;if(v&&typeof v==='object'){for(i in v){if(Object.prototype.hasOwnProperty.apply(v,[i])){n=walk(i,v[i]);if(n!==undefined){v[i]=n;}}}}
+return filter(k,v);}
+if(/^[\],:{}\s]*$/.test(text.replace(/\\./g,'@').replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g,']').replace(/(?:^|:|,)(?:\s*\[)+/g,''))){j=eval('('+text+')');return typeof filter==='function'?walk('',j):j;}
+throw new SyntaxError('parseJSON');}};}();}
+</script><script type="application/javascript">
+/*
+    http://phpjs.org/pages/license
+    MIT
+*/
+function basename (path, suffix) {
+    // http://kevin.vanzonneveld.net
+    // +   original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+    // +   improved by: Ash Searle (http://hexmen.com/blog/)
+    // +   improved by: Lincoln Ramsay
+    // +   improved by: djmix
+    // *     example 1: basename('/www/site/home.htm', '.htm');
+    // *     returns 1: 'home'
+    // *     example 2: basename('ecra.php?p=1');
+    // *     returns 2: 'ecra.php?p=1'
+    var b = path.replace(/^.*[\/\\]/g, '');
+
+    if (typeof(suffix) == 'string' && b.substr(b.length - suffix.length) == suffix) {
+        b = b.substr(0, b.length - suffix.length);
+    }
+
+    return b;
+}
+
+
+/*
+ * jQuery UI Effects 1.8.6
+ *
+ * Copyright 2010, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Effects/
+ */
+jQuery.effects||function(f,j){function m(c){var a;if(c&&c.constructor==Array&&c.length==3)return c;if(a=/rgb\(\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*\)/.exec(c))return[parseInt(a[1],10),parseInt(a[2],10),parseInt(a[3],10)];if(a=/rgb\(\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*\)/.exec(c))return[parseFloat(a[1])*2.55,parseFloat(a[2])*2.55,parseFloat(a[3])*2.55];if(a=/#([a-fA-F0-9]{2})([a-fA-F0-9]{2})([a-fA-F0-9]{2})/.exec(c))return[parseInt(a[1],
+16),parseInt(a[2],16),parseInt(a[3],16)];if(a=/#([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9])/.exec(c))return[parseInt(a[1]+a[1],16),parseInt(a[2]+a[2],16),parseInt(a[3]+a[3],16)];if(/rgba\(0, 0, 0, 0\)/.exec(c))return n.transparent;return n[f.trim(c).toLowerCase()]}function s(c,a){var b;do{b=f.curCSS(c,a);if(b!=""&&b!="transparent"||f.nodeName(c,"body"))break;a="backgroundColor"}while(c=c.parentNode);return m(b)}function o(){var c=document.defaultView?document.defaultView.getComputedStyle(this,null):this.currentStyle,
+a={},b,d;if(c&&c.length&&c[0]&&c[c[0]])for(var e=c.length;e--;){b=c[e];if(typeof c[b]=="string"){d=b.replace(/\-(\w)/g,function(g,h){return h.toUpperCase()});a[d]=c[b]}}else for(b in c)if(typeof c[b]==="string")a[b]=c[b];return a}function p(c){var a,b;for(a in c){b=c[a];if(b==null||f.isFunction(b)||a in t||/scrollbar/.test(a)||!/color/i.test(a)&&isNaN(parseFloat(b)))delete c[a]}return c}function u(c,a){var b={_:0},d;for(d in a)if(c[d]!=a[d])b[d]=a[d];return b}function k(c,a,b,d){if(typeof c=="object"){d=
+a;b=null;a=c;c=a.effect}if(f.isFunction(a)){d=a;b=null;a={}}if(typeof a=="number"||f.fx.speeds[a]){d=b;b=a;a={}}if(f.isFunction(b)){d=b;b=null}a=a||{};b=b||a.duration;b=f.fx.off?0:typeof b=="number"?b:f.fx.speeds[b]||f.fx.speeds._default;d=d||a.complete;return[c,a,b,d]}function l(c){if(!c||typeof c==="number"||f.fx.speeds[c])return true;if(typeof c==="string"&&!f.effects[c])return true;return false}f.effects={};f.each(["backgroundColor","borderBottomColor","borderLeftColor","borderRightColor","borderTopColor",
+"borderColor","color","outlineColor"],function(c,a){f.fx.step[a]=function(b){if(!b.colorInit){b.start=s(b.elem,a);b.end=m(b.end);b.colorInit=true}b.elem.style[a]="rgb("+Math.max(Math.min(parseInt(b.pos*(b.end[0]-b.start[0])+b.start[0],10),255),0)+","+Math.max(Math.min(parseInt(b.pos*(b.end[1]-b.start[1])+b.start[1],10),255),0)+","+Math.max(Math.min(parseInt(b.pos*(b.end[2]-b.start[2])+b.start[2],10),255),0)+")"}});var n={aqua:[0,255,255],azure:[240,255,255],beige:[245,245,220],black:[0,0,0],blue:[0,
+0,255],brown:[165,42,42],cyan:[0,255,255],darkblue:[0,0,139],darkcyan:[0,139,139],darkgrey:[169,169,169],darkgreen:[0,100,0],darkkhaki:[189,183,107],darkmagenta:[139,0,139],darkolivegreen:[85,107,47],darkorange:[255,140,0],darkorchid:[153,50,204],darkred:[139,0,0],darksalmon:[233,150,122],darkviolet:[148,0,211],fuchsia:[255,0,255],gold:[255,215,0],green:[0,128,0],indigo:[75,0,130],khaki:[240,230,140],lightblue:[173,216,230],lightcyan:[224,255,255],lightgreen:[144,238,144],lightgrey:[211,211,211],
+lightpink:[255,182,193],lightyellow:[255,255,224],lime:[0,255,0],magenta:[255,0,255],maroon:[128,0,0],navy:[0,0,128],olive:[128,128,0],orange:[255,165,0],pink:[255,192,203],purple:[128,0,128],violet:[128,0,128],red:[255,0,0],silver:[192,192,192],white:[255,255,255],yellow:[255,255,0],transparent:[255,255,255]},q=["add","remove","toggle"],t={border:1,borderBottom:1,borderColor:1,borderLeft:1,borderRight:1,borderTop:1,borderWidth:1,margin:1,padding:1};f.effects.animateClass=function(c,a,b,d){if(f.isFunction(b)){d=
+b;b=null}return this.each(function(){var e=f(this),g=e.attr("style")||" ",h=p(o.call(this)),r,v=e.attr("className");f.each(q,function(w,i){c[i]&&e[i+"Class"](c[i])});r=p(o.call(this));e.attr("className",v);e.animate(u(h,r),a,b,function(){f.each(q,function(w,i){c[i]&&e[i+"Class"](c[i])});if(typeof e.attr("style")=="object"){e.attr("style").cssText="";e.attr("style").cssText=g}else e.attr("style",g);d&&d.apply(this,arguments)})})};f.fn.extend({_addClass:f.fn.addClass,addClass:function(c,a,b,d){return a?
+f.effects.animateClass.apply(this,[{add:c},a,b,d]):this._addClass(c)},_removeClass:f.fn.removeClass,removeClass:function(c,a,b,d){return a?f.effects.animateClass.apply(this,[{remove:c},a,b,d]):this._removeClass(c)},_toggleClass:f.fn.toggleClass,toggleClass:function(c,a,b,d,e){return typeof a=="boolean"||a===j?b?f.effects.animateClass.apply(this,[a?{add:c}:{remove:c},b,d,e]):this._toggleClass(c,a):f.effects.animateClass.apply(this,[{toggle:c},a,b,d])},switchClass:function(c,a,b,d,e){return f.effects.animateClass.apply(this,
+[{add:a,remove:c},b,d,e])}});f.extend(f.effects,{version:"1.8.6",save:function(c,a){for(var b=0;b<a.length;b++)a[b]!==null&&c.data("ec.storage."+a[b],c[0].style[a[b]])},restore:function(c,a){for(var b=0;b<a.length;b++)a[b]!==null&&c.css(a[b],c.data("ec.storage."+a[b]))},setMode:function(c,a){if(a=="toggle")a=c.is(":hidden")?"show":"hide";return a},getBaseline:function(c,a){var b;switch(c[0]){case "top":b=0;break;case "middle":b=0.5;break;case "bottom":b=1;break;default:b=c[0]/a.height}switch(c[1]){case "left":c=
+0;break;case "center":c=0.5;break;case "right":c=1;break;default:c=c[1]/a.width}return{x:c,y:b}},createWrapper:function(c){if(c.parent().is(".ui-effects-wrapper"))return c.parent();var a={width:c.outerWidth(true),height:c.outerHeight(true),"float":c.css("float")},b=f("<div></div>").addClass("ui-effects-wrapper").css({fontSize:"100%",background:"transparent",border:"none",margin:0,padding:0});c.wrap(b);b=c.parent();if(c.css("position")=="static"){b.css({position:"relative"});c.css({position:"relative"})}else{f.extend(a,
+{position:c.css("position"),zIndex:c.css("z-index")});f.each(["top","left","bottom","right"],function(d,e){a[e]=c.css(e);if(isNaN(parseInt(a[e],10)))a[e]="auto"});c.css({position:"relative",top:0,left:0})}return b.css(a).show()},removeWrapper:function(c){if(c.parent().is(".ui-effects-wrapper"))return c.parent().replaceWith(c);return c},setTransition:function(c,a,b,d){d=d||{};f.each(a,function(e,g){unit=c.cssUnit(g);if(unit[0]>0)d[g]=unit[0]*b+unit[1]});return d}});f.fn.extend({effect:function(c){var a=
+k.apply(this,arguments),b={options:a[1],duration:a[2],callback:a[3]};a=b.options.mode;var d=f.effects[c];if(f.fx.off||!d)return a?this[a](b.duration,b.callback):this.each(function(){b.callback&&b.callback.call(this)});return d.call(this,b)},_show:f.fn.show,show:function(c){if(l(c))return this._show.apply(this,arguments);else{var a=k.apply(this,arguments);a[1].mode="show";return this.effect.apply(this,a)}},_hide:f.fn.hide,hide:function(c){if(l(c))return this._hide.apply(this,arguments);else{var a=
+k.apply(this,arguments);a[1].mode="hide";return this.effect.apply(this,a)}},__toggle:f.fn.toggle,toggle:function(c){if(l(c)||typeof c==="boolean"||f.isFunction(c))return this.__toggle.apply(this,arguments);else{var a=k.apply(this,arguments);a[1].mode="toggle";return this.effect.apply(this,a)}},cssUnit:function(c){var a=this.css(c),b=[];f.each(["em","px","%","pt"],function(d,e){if(a.indexOf(e)>0)b=[parseFloat(a),e]});return b}});f.easing.jswing=f.easing.swing;f.extend(f.easing,{def:"easeOutQuad",swing:function(c,
+a,b,d,e){return f.easing[f.easing.def](c,a,b,d,e)},easeInQuad:function(c,a,b,d,e){return d*(a/=e)*a+b},easeOutQuad:function(c,a,b,d,e){return-d*(a/=e)*(a-2)+b},easeInOutQuad:function(c,a,b,d,e){if((a/=e/2)<1)return d/2*a*a+b;return-d/2*(--a*(a-2)-1)+b},easeInCubic:function(c,a,b,d,e){return d*(a/=e)*a*a+b},easeOutCubic:function(c,a,b,d,e){return d*((a=a/e-1)*a*a+1)+b},easeInOutCubic:function(c,a,b,d,e){if((a/=e/2)<1)return d/2*a*a*a+b;return d/2*((a-=2)*a*a+2)+b},easeInQuart:function(c,a,b,d,e){return d*
+(a/=e)*a*a*a+b},easeOutQuart:function(c,a,b,d,e){return-d*((a=a/e-1)*a*a*a-1)+b},easeInOutQuart:function(c,a,b,d,e){if((a/=e/2)<1)return d/2*a*a*a*a+b;return-d/2*((a-=2)*a*a*a-2)+b},easeInQuint:function(c,a,b,d,e){return d*(a/=e)*a*a*a*a+b},easeOutQuint:function(c,a,b,d,e){return d*((a=a/e-1)*a*a*a*a+1)+b},easeInOutQuint:function(c,a,b,d,e){if((a/=e/2)<1)return d/2*a*a*a*a*a+b;return d/2*((a-=2)*a*a*a*a+2)+b},easeInSine:function(c,a,b,d,e){return-d*Math.cos(a/e*(Math.PI/2))+d+b},easeOutSine:function(c,
+a,b,d,e){return d*Math.sin(a/e*(Math.PI/2))+b},easeInOutSine:function(c,a,b,d,e){return-d/2*(Math.cos(Math.PI*a/e)-1)+b},easeInExpo:function(c,a,b,d,e){return a==0?b:d*Math.pow(2,10*(a/e-1))+b},easeOutExpo:function(c,a,b,d,e){return a==e?b+d:d*(-Math.pow(2,-10*a/e)+1)+b},easeInOutExpo:function(c,a,b,d,e){if(a==0)return b;if(a==e)return b+d;if((a/=e/2)<1)return d/2*Math.pow(2,10*(a-1))+b;return d/2*(-Math.pow(2,-10*--a)+2)+b},easeInCirc:function(c,a,b,d,e){return-d*(Math.sqrt(1-(a/=e)*a)-1)+b},easeOutCirc:function(c,
+a,b,d,e){return d*Math.sqrt(1-(a=a/e-1)*a)+b},easeInOutCirc:function(c,a,b,d,e){if((a/=e/2)<1)return-d/2*(Math.sqrt(1-a*a)-1)+b;return d/2*(Math.sqrt(1-(a-=2)*a)+1)+b},easeInElastic:function(c,a,b,d,e){c=1.70158;var g=0,h=d;if(a==0)return b;if((a/=e)==1)return b+d;g||(g=e*0.3);if(h<Math.abs(d)){h=d;c=g/4}else c=g/(2*Math.PI)*Math.asin(d/h);return-(h*Math.pow(2,10*(a-=1))*Math.sin((a*e-c)*2*Math.PI/g))+b},easeOutElastic:function(c,a,b,d,e){c=1.70158;var g=0,h=d;if(a==0)return b;if((a/=e)==1)return b+
+d;g||(g=e*0.3);if(h<Math.abs(d)){h=d;c=g/4}else c=g/(2*Math.PI)*Math.asin(d/h);return h*Math.pow(2,-10*a)*Math.sin((a*e-c)*2*Math.PI/g)+d+b},easeInOutElastic:function(c,a,b,d,e){c=1.70158;var g=0,h=d;if(a==0)return b;if((a/=e/2)==2)return b+d;g||(g=e*0.3*1.5);if(h<Math.abs(d)){h=d;c=g/4}else c=g/(2*Math.PI)*Math.asin(d/h);if(a<1)return-0.5*h*Math.pow(2,10*(a-=1))*Math.sin((a*e-c)*2*Math.PI/g)+b;return h*Math.pow(2,-10*(a-=1))*Math.sin((a*e-c)*2*Math.PI/g)*0.5+d+b},easeInBack:function(c,a,b,d,e,g){if(g==
+j)g=1.70158;return d*(a/=e)*a*((g+1)*a-g)+b},easeOutBack:function(c,a,b,d,e,g){if(g==j)g=1.70158;return d*((a=a/e-1)*a*((g+1)*a+g)+1)+b},easeInOutBack:function(c,a,b,d,e,g){if(g==j)g=1.70158;if((a/=e/2)<1)return d/2*a*a*(((g*=1.525)+1)*a-g)+b;return d/2*((a-=2)*a*(((g*=1.525)+1)*a+g)+2)+b},easeInBounce:function(c,a,b,d,e){return d-f.easing.easeOutBounce(c,e-a,0,d,e)+b},easeOutBounce:function(c,a,b,d,e){return(a/=e)<1/2.75?d*7.5625*a*a+b:a<2/2.75?d*(7.5625*(a-=1.5/2.75)*a+0.75)+b:a<2.5/2.75?d*(7.5625*
+(a-=2.25/2.75)*a+0.9375)+b:d*(7.5625*(a-=2.625/2.75)*a+0.984375)+b},easeInOutBounce:function(c,a,b,d,e){if(a<e/2)return f.easing.easeInBounce(c,a*2,0,d,e)*0.5+b;return f.easing.easeOutBounce(c,a*2-e,0,d,e)*0.5+d*0.5+b}})}(jQuery);
+;/*
+ * jQuery UI Effects Bounce 1.8.6
+ *
+ * Copyright 2010, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Effects/Bounce
+ *
+ * Depends:
+ *	jquery.effects.core.js
+ */
+(function(e){e.effects.bounce=function(b){return this.queue(function(){var a=e(this),l=["position","top","left"],h=e.effects.setMode(a,b.options.mode||"effect"),d=b.options.direction||"up",c=b.options.distance||20,m=b.options.times||5,i=b.duration||250;/show|hide/.test(h)&&l.push("opacity");e.effects.save(a,l);a.show();e.effects.createWrapper(a);var f=d=="up"||d=="down"?"top":"left";d=d=="up"||d=="left"?"pos":"neg";c=b.options.distance||(f=="top"?a.outerHeight({margin:true})/3:a.outerWidth({margin:true})/
+3);if(h=="show")a.css("opacity",0).css(f,d=="pos"?-c:c);if(h=="hide")c/=m*2;h!="hide"&&m--;if(h=="show"){var g={opacity:1};g[f]=(d=="pos"?"+=":"-=")+c;a.animate(g,i/2,b.options.easing);c/=2;m--}for(g=0;g<m;g++){var j={},k={};j[f]=(d=="pos"?"-=":"+=")+c;k[f]=(d=="pos"?"+=":"-=")+c;a.animate(j,i/2,b.options.easing).animate(k,i/2,b.options.easing);c=h=="hide"?c*2:c/2}if(h=="hide"){g={opacity:0};g[f]=(d=="pos"?"-=":"+=")+c;a.animate(g,i/2,b.options.easing,function(){a.hide();e.effects.restore(a,l);e.effects.removeWrapper(a);
+b.callback&&b.callback.apply(this,arguments)})}else{j={};k={};j[f]=(d=="pos"?"-=":"+=")+c;k[f]=(d=="pos"?"+=":"-=")+c;a.animate(j,i/2,b.options.easing).animate(k,i/2,b.options.easing,function(){e.effects.restore(a,l);e.effects.removeWrapper(a);b.callback&&b.callback.apply(this,arguments)})}a.queue("fx",function(){a.dequeue()});a.dequeue()})}})(jQuery);
+;/*
+ * jQuery UI Effects Highlight 1.8.6
+ *
+ * Copyright 2010, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Effects/Highlight
+ *
+ * Depends:
+ *	jquery.effects.core.js
+ */
+(function(b){b.effects.highlight=function(c){return this.queue(function(){var a=b(this),e=["backgroundImage","backgroundColor","opacity"],d=b.effects.setMode(a,c.options.mode||"show"),f={backgroundColor:a.css("backgroundColor")};if(d=="hide")f.opacity=0;b.effects.save(a,e);a.show().css({backgroundImage:"none",backgroundColor:c.options.color||"#ffff99"}).animate(f,{queue:false,duration:c.duration,easing:c.options.easing,complete:function(){d=="hide"&&a.hide();b.effects.restore(a,e);d=="show"&&!b.support.opacity&&
+this.style.removeAttribute("filter");c.callback&&c.callback.apply(this,arguments);a.dequeue()}})})}})(jQuery);
+;/*
+ * jQuery UI Effects Pulsate 1.8.6
+ *
+ * Copyright 2010, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Effects/Pulsate
+ *
+ * Depends:
+ *	jquery.effects.core.js
+ */
+(function(d){d.effects.pulsate=function(a){return this.queue(function(){var b=d(this),c=d.effects.setMode(b,a.options.mode||"show");times=(a.options.times||5)*2-1;duration=a.duration?a.duration/2:d.fx.speeds._default/2;isVisible=b.is(":visible");animateTo=0;if(!isVisible){b.css("opacity",0).show();animateTo=1}if(c=="hide"&&isVisible||c=="show"&&!isVisible)times--;for(c=0;c<times;c++){b.animate({opacity:animateTo},duration,a.options.easing);animateTo=(animateTo+1)%2}b.animate({opacity:animateTo},duration,
+a.options.easing,function(){animateTo==0&&b.hide();a.callback&&a.callback.apply(this,arguments)});b.queue("fx",function(){b.dequeue()}).dequeue()})}})(jQuery);
+;</script>
+<title>FrozenDEFENCE 2 by Frozenball (orkkiolento [at] gmail [dot] com)</title>
+<style>
+body {
+    font-family:Verdana;
+    font-size:12px;
+    padding:30px;
+    background-color:#dfe1e3;
+    background-image:url(bgbg.png);
+}
+#td {
+    font-size:10px;
+    text-align:left;
+    padding:0px;
+    margin:0px;
+    border:1px black solid;
+    width:640px;
+    height:480px;
+    background-color:rgb(40,40,40);
+}
+#tdLifes { height:20px; }
+#tdText { position:relative; top:100px; text-align:center; color:white;}
+#tdText strong { font-size:30px; }
+#tdText span { font-size:16px; }
+#tdAll { display:none; }
+#tdGame { display:none; -webkit-user-select:none; -moz-user-select:none; }
+#loadImages { position:absolute; top:-3px; left:-3px; opacity:0; overflow:hidden; width:1px; height:1px; }
+#tdMenu { background-color:#272727; -webkit-user-select:none; -moz-user-select:none; }
+#tdLevel { color:#ef1c1c; }
+#tdMoney { color:#0eec2d; }
+#tdScore { display:none; color:#0d8bba; margin-top:-28px; text-align:right; font-size:12px; font-family:Verdana; opacity:0.5; }
+#tdMenu h3 { color:white; }
+#tdCopyright { color:white; font-size:10px; font-family:Tahoma; position:relative; top:270px; width:120px; }
+#tdBuild { color:white; font-size:14px; }
+#tdBuild tr:hover { background-color:#335538; cursor:pointer; }
+#tdNote {
+    display:none;
+    margin-top:-100px; margin-left:20px;
+    width:200px; height:50px;
+    padding:15px;
+    background-color:#f8e3b2;
+    opacity:0.7;
+    -moz-border-radius:10px;
+    border-radius:10px;
+    font-family:Verdana;
+    font-size:12px;
+    text-align:justify;
+    -webkit-user-select:none; -moz-user-select:none;
+}
+#tdTowerInfo {
+    position:absolute;
+    right:10px; bottom:10px;
+    width:130px; height:50px;
+    padding:15px;
+    background-color:#f8e3b2;
+    opacity:0.7;
+    -moz-border-radius:10px;
+    border-radius:5px;
+    font-family:Tahoma;
+    font-size:10px;
+    -webkit-user-select:none; -moz-user-select:none; cursor:default;
+}
+#tdHighscores {
+    display:none;
+    z-index:9999;
+    margin-top:-430px; margin-left:25px;
+    width:400px; height:335px;
+    padding:15px;
+    background-color:#cdd9ec;
+    border:2px #2d7cf3 solid;
+    opacity:0.9;
+    -moz-border-radius:10px;
+    border-radius:10px;
+    font-family:Verdana;
+    font-size:16px;
+}
+#tdMenuSelect,#tdMenuCampaign,#tdMenuSettings,#tdMenuShop {
+    display:none;
+    background-color:rgb(99,182,203);
+    background-image:url(frozendefence_bg.png);
+    height:440px; width:600px; padding:20px;
+}
+#tdMenuCampaign,#tdMenuSettings { background-image:url(frozendefence_bg2.png); }
+#tdMenuCampaign div a {
+    float:left; padding:10px; width:25px; opacity:0.8; text-align:center; display:block; margin:5px; font-size:18px; text-decoration:none; background-color:#0c4a8a; color:white; border-radius:5px; -moz-border-radius:5px;
+}
+#tdMenuCampaign div a:hover { opacity:1; }
+#tdMenuCampaign div a.notYetCompleted { opacity:0.1!important; }
+#tdMenuSettings { font-size:14px; }
+#tdMenuSelect h1,#tdMenuCampaign h1,#tdMenuSettings h1,#tdMenuShop h1 {
+    color:white;
+    text-shadow: 0px 0px 10px #0a4257;
+    font-size:40px; text-align:center; margin:0px; padding-top:20px; font-family:Trebuchet MS; }
+.tdImageLink { display:block; float:left; margin-right:10px; color:black; text-decoration:none!important; width:186px; height:125px; padding-top:75px; text-align:center; font-size:30px; border-radius:10px; -moz-border-radius:10px; }
+#tdCanvasTable { width:480px!important; height:480px!important; padding:0px!important; margin:0px!important; }
+#tdWrapper2 { height:480px; }
+#tdMenuShop .buybutton {
+    display:block;
+    margin-bottom:7px;
+    padding:11px;
+    color:white;
+    background-color:#9b906a;
+    text-decoration:none;
+    border-radius:4px;
+    font-size:13px;
+    
+}
+.yephavethis {
+    background-color:#34a032!important;
+}
+</style>
+ 
+<body>
+    <center>
+        <!--[if lte IE 6]><style>#tdText { display:none!important; } #tdCanvasNotSupported { display:block!important; }</style>
+        <![endif]-->
+        <div id="tdWrapper">
+            <div style="float:left; margin-right:10px;">
+                <script type="text/javascript"><!--
+                google_ad_client = "ca-pub-0627711450592334";
+                /* FrozenDefence_Leve�torni */
+                google_ad_slot = "6618017086";
+                google_ad_width = 160;
+                google_ad_height = 600;
+                //-->
+                </script>
+                <script type="text/javascript"
+                src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+                </script>
+            </div>
+            <div id="td"><div id="tdWrapper2">
+    
+                <div id="tdText">
+                    <strong>FrozenDEFENCE 2</strong><br /><br />
+                    <span id="tdTextSpan"><noscript>Please enable Javascript</noscript></span>
+                    <script type="text/javascript">document.getElementById('tdTextSpan').innerHTML = 'Loading...';</script>
+                </div>
+                    <div class="tdBox" id="tdMenuSelect" style="position:relative;">
+                            <h1>FrozenDEFENCE 2</h1>
+                            <div style="font-family:Georgia; text-align:center; font-size:20px; margin-top:15px; color:white;">
+                                Tower defence meets HTML5
+                            </div>
+                            <div style="position:absolute; bottom:10px; right:10px;">
+                                <a href="http://www.w3.org/html/logo/">
+                                    <img src="http://www.w3.org/html/logo/badge/html5-badge-h-graphics.png" width="133" height="64" alt="HTML5 Powered with Graphics, 3D &amp; Effects" title="HTML5 Powered with Graphics, 3D &amp; Effects">
+                                </a>
+                            </div>
+                            <br /><br />
+                            <a id="tdMenuSelectArcade" class="tdImageLink" href="javascript:playArcade();" style="margin-left:10px; background-image:url(frozendefence_arcade.png);" title="Never ending tower defence: build towers, kill creeps, earn money and build more towers">Arcade</a>
+                            <a id="tdMenuSelectCampaign" class="tdImageLink" href="javascript:showMenuCampaign();" style=" background-image:url(frozendefence_campaign.png);" title="Different levels" title="Different kinds of levels">Challenge</a>
+                            <a id="tdMenuSelectPerfection" class="tdImageLink" href="javascript:playPerfection();" style=" background-image:url(frozendefence_perfectsetup.png);" title="You are given a sum of money at the beginning. After first wave, no towers can be placed or upgraded.">Perfection</a>
+                            <br style="clear:left;" />
+                            <a id="tdMenuSelectSettings" href="javascript:showSettings();" style="position:absolute; bottom:20px; left:20px; color:white; background-color:#3b3b3b; padding:10px; border-radius:5px; -moz-border-radius:5px; text-decoration:none; font-size:14px;">Settings</a>
+                            <div style="position:absolute; bottom:23px; left:140px;">
+                                <img src="coin32.png" alt="" style="width:30px;" />
+                            </div>
+                            <div style="position:absolute; bottom:27px; left:180px; font-size:18px; font-family:Georgia; color:white; ">
+                                <a href="javascript:showMenuShop();" style="color:white; text-decoration:none;"><span class="tdLookAtMeIHaveCoins">0</span> star coins</a>
+                            </div>
+                            <div style="position:absolute; bottom:20px; left:310px; font-size:18px; font-family:Georgia; color:white; ">
+                                <span title="orkkiolento [at] gmail [dot] com">&copy; Frozenball</span><br />
+                                <small>special thanks to tobi1986</small>
+                            </div>
+                    </div>
+                    <div class="tdBox" id="tdMenuCampaign" style="position:relative;">
+                            <h1>Challenges</h1><br /><br />
+                            <div style="padding-left:20px; padding-right:20px; padding-bottom:20px;">
+                                <h2 style="color:white; padding-left:3px;">Challenge</h2><br style="clear:left;" />
+                                <a href="javascript:playCampaign(1,11)" title="Level 1: Basic">1</a>
+                                <a href="javascript:playCampaign(2,31)" title="Level 2: Restricted Zoning">2</a>
+                                <a href="javascript:playCampaign(3,66,function(){gameMoney=10000;updateGUI();})" title="Level 3: Money Making">3</a>
+                                <a href="javascript:playCampaign(4,32,function(){for(var i = 1; i <= 100; i++) { director.levelData[i][4] = 0.4*director.levelData[i][4]; } showNote('There are a few nukes on the map. Clicking them makes them explode.');})" title="Level 4: Nuke 'Em Away">4</a>
+                                <a href="javascript:playCampaign(5,41)" title="Level 5: Double or Nothing">5</a>
+                                <a href="javascript:playCampaign(6,56)" title="Level 6: Fewer Is Better"">6</a>
+                                <a href="javascript:playCampaign(7,49,function(){director.difficulty=2;updateGUI();})" title="Level 7: Spiral">7</a>
+                                <a href="javascript:playCampaign(8,21,function(){gameMoney=10000;updateGUI();})" title="Level 8: Trio">8</a>
+                                <a href="javascript:playCampaign(9,31,function(){gameMoney=3000;updateGUI();})" title="Level 9: Join Us">9</a>
+                                <a href="javascript:playCampaign(10,70)" title="Steps">10</a>
+                            </div><br style="clear:left;" /><br />
+                            <div id="bonusmaps" style="padding-left:20px; padding-right:20px; padding-bottom:20px;">
+                                <h2 style="color:white; padding-left:3px;">Bonus maps</h2>
+                                <p style="font-size:13px; color:white; font-family:Georgia; padding-left:3px;">You can unlock maps with star coins!</p>
+                                <a id="campaign_bonus11" href="javascript:playBonusMap(1000011,21,function(){})" title="Level 11">11</a>
+                                <a id="campaign_bonus12" href="javascript:playBonusMap(1000012,16,function(){})" title="Level 12">12</a>
+                                <a id="campaign_bonus13" href="javascript:playBonusMap(1000013,21,function(){})" title="Level 13">13</a>
+                                <a id="campaign_bonus14" href="javascript:playBonusMap(1000014,41,function(){})" title="Level 14">14</a>
+                                <a id="campaign_bonus15" href="javascript:playBonusMap(1000015,11,function(){})" title="Level 15">15</a>
+                            </div><br style="clear:left;" /><br />
+                            
+                            <a href="javascript:showMenu();" style="position:absolute; bottom:20px; left:20px; color:white; background-color:#3b3b3b; padding:10px; border-radius:5px; -moz-border-radius:5px; text-decoration:none; font-size:14px;">Go Back</a>
+                    </div>
+                    <div class="tdBox" id="tdMenuSettings" style="color:white;">
+                            <h1>Settings</h1><br /><br />
+                            <div style="padding-left:20px; padding-right:20px; padding-bottom:225px;">
+                                <div style="padding-bottom:3px;"><input type="checkbox" id="tdSettingsAutoQuality" value="1" /> Auto quality</div>
+                                <div style="padding-bottom:3px;"><input type="checkbox" id="tdSettingsParticles" value="1" /> Particles</div>
+                                <div style="padding-bottom:3px;"><input type="checkbox" id="tdSettingsDispersion" value="1" /> Dispersion Effect (CPU heavy)</div>
+                            </div><br style="clear:left;" />
+                            <a href="javascript:showMenu();" style="color:white; background-color:#3b3b3b; padding:10px; border-radius:5px; -moz-border-radius:5px; text-decoration:none; font-size:14px;">Go Back</a>
+                    </div>
+                    <div class="tdBox" id="tdMenuShop" style="position:relative; background-image:url(shopbg.png);">
+                            <h1>Star Coin Shop</h1>
+                            <div style="padding-left:20px; padding-right:20px; padding-bottom:20px;">
+                                <h2 style="color:white; padding-left:3px;">Bonus maps</h2>
+                                <div style="float:left; color:white; margin-right:20px;">
+                                    <a class="buybutton" data-buy="bonusmap11" href="javascript:buyStore('bonusmap11',10)">Map #11</a>
+                                    <center>Buy for <img src="coin32.png" alt="" style="width:20px; margin-bottom:-4px;" /> 10</center>
+                                </div>
+                                <div style="float:left; color:white; margin-right:20px;">
+                                    <a class="buybutton" data-buy="bonusmap12" href="javascript:buyStore('bonusmap12',15)">Map #12</a>
+                                    <center>Buy for <img src="coin32.png" alt="" style="width:20px; margin-bottom:-4px;" /> 15</center>
+                                </div>
+                                <div style="float:left; color:white; margin-right:20px;">
+                                    <a class="buybutton" data-buy="bonusmap13" href="javascript:buyStore('bonusmap13',20)">Map #13</a>
+                                    <center>Buy for <img src="coin32.png" alt="" style="width:20px; margin-bottom:-4px;" /> 20</center>
+                                </div>
+                                <div style="float:left; color:white; margin-right:20px;">
+                                    <a class="buybutton" data-buy="bonusmap14" href="javascript:buyStore('bonusmap14',25)">Map #14</a>
+                                    <center>Buy for <img src="coin32.png" alt="" style="width:20px; margin-bottom:-4px;" /> 25</center>
+                                </div>
+                                <div style="float:left; color:white; margin-right:20px;">
+                                    <a class="buybutton" data-buy="bonusmap15" href="javascript:buyStore('bonusmap15',30)">Map #15</a>
+                                    <center>Buy for <img src="coin32.png" alt="" style="width:20px; margin-bottom:-4px;" /> 30</center>
+                                </div>
+                            </div>
+                            <div style="padding-left:20px; padding-right:20px; padding-bottom:20px;">
+                                <h2 style="color:white; padding-left:3px; margin-top:80px;">Towers</h2>
+                                <div style="float:left; color:white; margin-right:20px;">
+                                    <a class="buybutton" data-buy="slowtower" href="javascript:buyStore('slowtower',20)">Slow Tower</a>
+                                    <center>Buy for <img src="coin32.png" alt="" style="width:20px; margin-bottom:-4px;" /> 20</center>
+                                </div>
+                                <div style="float:left; color:white; margin-right:20px;">
+                                    <a class="buybutton" data-buy="shotguntower" href="javascript:buyStore('shotguntower',100)">Shotgun Tower</a>
+                                    <center>Buy for <img src="coin32.png" alt="" style="width:20px; margin-bottom:-4px;" /> 100</center>
+                                </div>
+                            </div>
+                            
+                            <div style="position:absolute; bottom:23px; left:140px;">
+                                <img src="coin32.png" alt="" style="width:30px;" />
+                            </div>
+                            <div style="position:absolute; bottom:27px; left:180px; font-size:18px; font-family:Georgia; color:white; ">
+                                <span class="tdLookAtMeIHaveCoins">0</span> star coins
+                            </div>
+                            <a href="javascript:showMenu();" style="position:absolute; bottom:20px; left:20px; color:white; background-color:#3b3b3b; padding:10px; border-radius:5px; -moz-border-radius:5px; text-decoration:none; font-size:14px;">Go Back</a>
+                    </div>
+                    <div class="tdBox" id="tdCanvasNotSupported" style="display:none; width:640px; height:480px; background-color:red; background-image:url(frozendefence_red_bg.png);">
+                        <h1 style="color:white; font-size:50px; font-family:Trebuchet MS; padding-left:20px; padding:20px; padding-left:30px; margin-bottom:0px; padding-bottom:0px;">Get a better browser</h1>
+                        <p style="color:white; font-family:Trebuchet MS; font-size:14px; padding-left:30px;">This game requires Canvas support. Please install <a href="http://www.google.com/chrome?hl=fi" style="color:white;">Google Chrome</a> (it's free!) to play this game.</p>
+                    </div>
+                    <div class="tdBox" id="tdAll">
+                        <table width="640" height="480" border="0" cellpadding=0 cellspacing=0>
+                            <tr>
+                                <td id="tdCanvasTable">
+                                    <div id="tdGameDiv" style="position:relative!important; width:480px; height:480px;">
+                                        <canvas id="tdGame" width="480" height="480"></canvas>
+                                        <div id="tdTowerInfo">
+                                            <div style="padding-bottom:6px; font-weight:bold;">Damage per second</div>
+                                            <div style="padding-bottom:3px;">Currently: <span id="tdTowerInfoDMS">23</span> dmg/s</div>
+                                            <div style="padding-bottom:3px;">After upgrade: <span id="tdTowerInfoDMSUpgrade">52</span> dmg/s</div>
+                                            <div style="padding-bottom:3px; display:none;">DPS/Price: <span id="tdTowerInfoDMSPP">643</span> dmg/(s*�)</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td id="tdMenu" style="width:160px; vertical-align:top; height:480px;">
+                                    <div style=" position:relative; height:480px;">
+                                    <div style="padding:20px; padding-top:10px;">
+                                        <h2 id="tdLevel">Level 1</h2>
+                                        <h2 id="tdScore" title="Score"></h2>
+                                        <h2 id="tdMoney" title="How much money you have left">1000 &euro;</h2>
+                                        <div id="tdLifes" title="How many lifes you have left">
+                                            GRARAHA
+                                        </div>
+                                        <h3>Build</h3>
+                                        <p>
+                                            <table id="tdBuild" width="120" cellpadding=3 cellspacing=0>
+                                                <tr id="tdBuildWaterTower" data-build="WaterTower" data-price=500 title="Cannon Tower: shoots cannons">
+                                                    <td><img id="tdImageWater" src="tower1.png" style="width:23px;" /></td>
+                                                    <td>500 &euro;</td>
+                                                </tr>
+                                                <tr data-build="GatlingTower" data-price=600 title="Gatling Tower, shoots slow bullets rapidly, low damage">
+                                                    <td><img id="tdImageGatlingTower" src="tower2.png" style="width:20px;" /></td>
+                                                    <td>600 &euro;</td>
+                                                </tr>
+                                                <tr id="tdBuildShotgunTower"  data-build="ShotgunTower" data-price=1000 title="Shotgun Tower">
+                                                    <td><img id="tdImageShotgunTower" style="width:20px;" src="tower6.png" /></td>
+                                                    <td>1000 &euro;</td>
+                                                </tr>
+                                                <tr data-build="LaserTower" data-price=1100 title="Laser Tower: shoots laser">
+                                                    <td><img id="tdImageGuidedLaser" src="tower3.png" style="width:20px;" /></td>
+                                                    <td>1100 &euro;</td>
+                                                </tr>
+                                                <tr data-build="ShakeTower" data-price=3000 title="Shake Tower: causes earthquakes, affects multiple creeps.">
+                                                    <td><img id="tdImageShakeTower" style="width:20px;" src="data:image/png,%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%1F%00%00%00%1F%08%06%00%00%00%1F%AE%169%00%00%00%01sRGB%00%AE%CE%1C%E9%00%00%00%06bKGD%00%40%00%3F%00%3F8%E1l%A6%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%9A%9C%18%00%00%00%07tIME%07%DA%0A%1F%0E%0C%0E%7C(%85%80%00%00%00%19tEXtComment%00Created%20with%20GIMPW%81%0E%17%00%00%02zIDATH%C7%E5%97MO%DB%40%10%86_%CF%CEz%13%B8p%40B%88%03%7F%20r%8D%CA%05%2C%02%3F%BD%90%92%0B%09%0Anz%E2%C0)B9%A7%08y%3F%7B%20ICP%8Cc%1A%B5%12%23%F9%60%ADg%9F%D9%99%9D%0F%03%9FU%A2%C5%97%8B%F3%F3%B0i%E0%B7%CB%CB9%93%16%C1%2C%C4F%C1%2C%C4%AB%03%D2%E2%A2un%A3%F0%E5%FDy%DD%0DB%08%08!%00!%20%CC%E2%16E%88%A6%CFZ%9EX%07j%ADE%B3%D9DD%04)%25%BC%F7%20%22%18c%10%BC%C7%F3%F33%98%B9%B2%11%95%E0%D6Z(%A5%D0%DC%DA%C2%F1%F11%F6%F6%F6ppp0%87%8FF%23%8C%C7c%F4z%3D%18%ADQ%14%05%98%F9%E3pk-%243N%B3%0Ci%9ABk%0Dk-%26%93%09B%08%88%A2%08%3B%3B%3B%D8%DD%DD%C5%D1%D1%11%06%83%01%BE_%5D%C1X%FB%AE%01%A5%AB%CEZH)q%9Aeh%B5Zxzz%82%F7%FEM8%9Csp%CE%C1%18%83V%AB%05%EF%3D%BA%D7%D7%B0%C6%40%94%18%40epm%0C%CE%DAm%24I%82%A2(%DE%80%97%C5%7B%8F%A2(%90%24%09%CE%DAmhcJ%BF_%09w%CE!%96%12i%9AV%02%2F%1B%90%A6)b)%E1J%D2%97%CAb%7D%92e%D0ZW%06%2F%1A%A0%B5%C6I%96%C1Z%BB%3E%DC%18%83%C3%C3C%98w%5C%F7%11%FD%95p%EF%DC%3C%9D%EA%88%F7%FEE%BF%8E%DB%C3%C2m%AE%233%BDP%E7%C2Q%14Ak%0D%22%AA%05'%A2%17%FD%92j%B7rg!%04%1E%1E%1E%20jv%BA*%FA%2B%E1RJ%DC%DF%DFCJY%0B%5EE%7F%F5%C9%99q%DB%EFW%AE%D3%AF%CA%263%8A%A2%C0m%BF_%AF%C2%11%11%1AJ%A1%D3%E9%40k%5D%D9%00f%86%D6%1A%9DN%07%0D%A5J%EFL%E9%8E%2C%25%F2%C1%00%DE%7BdY%868%8E%E1%9C%FB%D3%D3g%B3%D8%B4%97%0B!%A0%B5F%B7%DB%C50%CF%11%2BU%BF%B1%10%11b%A50%CCs%08!%F0%25I%A0%1A%0D%D0%B4%9F%CF%BA%9A1%06%DE%7B%FC%9ALp%97%E7s%F0%7B%99%C2UR%26V%0A%3F%F2%1C%BD%9B%1B%7C%9D%F5%F3%FD%7D%F8%10%40Q%84%D1%E3%23%C6%E31%FA%BD%1E%94R%95%C0%95%87%09%22B%1C%C7%60f%FC%1C%0Eq7%0D%C5%EC%E4D%04f%C6%F6%F6%F6Zu%81%D7-%1C3%97%FF%0D!%FCC%A1%E5%B9z%D3s%FB%7F%F3%C7%F2y%E57%10%9EB%7D%90%3B%91%91%00%00%00%00IEND%AEB%60%82" /></td>
+                                                    <td>3000 &euro;</td>
+                                                </tr>
+                                                <tr id="tdBuildSlowTower"  data-build="SlowTower" data-price=4400 title="Slow Tower: forces creeps to go slower">
+                                                    <td><img id="tdImageSlowTower" style="width:20px;" src="tower5.png" /></td>
+                                                    <td>4400 &euro;</td>
+                                                </tr>
+
+                                                
+                                            </table>
+                                        </p>
+                                        <br />
+                                            <a id="upgradeButton" href="javascript:upgrade()" style="display:block; color:white; background-color:#324234; padding:8px; text-align:center; border-radius:5px; -moz-border-radius:5px; text-decoration:none; font-size:10px; margin-bottom:2px;">Upgrade</a>
+                                            <a id="sellButton" href="javascript:sell()" style="display:block; color:white; background-color:#3b3b34; padding:8px; text-align:center; border-radius:5px; -moz-border-radius:5px;  text-decoration:none; font-size:10px; margin-bottom:2px;">Sell</a>
+                                            <a id="nextWaveButton" href="javascript:nextWave()" style="display:block; color:white; background-color:#3b3b3b; padding:8px; text-align:center; border-radius:5px; -moz-border-radius:5px;  text-decoration:none; font-size:14px; margin-bottom:2px;">Next wave</a>
+                                            <a id="endGameButton" href="javascript:(function(){if (guiStatus == 'gameover') { return; } guiStatus='gameover'; showScores(map_id)})();" onclick="return confirm('Are you sure?');" style="display:block; color:white; background-color:#3b3b3b; padding:8px; text-align:center; border-radius:5px; -moz-border-radius:5px;  text-decoration:none; font-size:14px;">End game</a>
+                                        <!--
+                                        <div id="tdCopyright">
+                                            <script type="text/javascript">
+                                            document.write("&copy; Copyright 2010 Frozenball<br/>orkkiolento"+String.fromCharCode(64)+"gm"+String.fromCharCode(97)+"il"+String.fromCharCode(46)+"com");
+                                            </script>
+                                        </div>-->
+                                    </div>
+                                    
+                                    <a id="pauseButton" href="javascript:setGamePause(1)" style="position:absolute; bottom:5px; right:5px; width:20px; height:20px; display:block;"><img style="border:none;" src="data:image/png,%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%14%00%00%00%14%08%06%00%00%00%8D%89%1D%0D%00%00%00%01sRGB%00%AE%CE%1C%E9%00%00%00%06bKGD%00%FF%00%FF%00%FF%A0%BD%A7%93%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%9A%9C%18%00%00%00%07tIME%07%DA%0B%07%0C%11%07Q%D1%D3%96%00%00%00%19tEXtComment%00Created%20with%20GIMPW%81%0E%17%00%00%01%17IDAT8%CB%B5%95Aj%C30%10E%C73%2B%81V%01%83%AE%E1%23%B8%D0%8DWs%8A%F6%00%86%1C%C27pN1%2Bm%02%F1%11r%0D%83A%2B%81V%A3t%95%12%8C%DB%A6%89%F2v%12%9A%8740_%15%FC%80%88%B4%D6%DA%C1%18%D3%10%11%5D.%17%C89kJ%E9%1Cc%DC3%F3%B4UWm%89%EA%BA%3E%12%11%C1%2F%A8%AA.%CB%F2%BE%16%E3%ED%C2%7B%3F%3A%E7N%7F%C9%00%00%88%88%9Cs'%EF%FD%B8yC%EF%FD%B8%DB%ED%3E%E0%01B%08%87%AE%EB%3E%BF%85%22%D2%3A%E7N%F0%04%F3%3C%BF1%F3%84%00%00u%5D%1F%D7%07%FA%BE%87%BE%EF%E1%DE%FD%AB%03E%A4%BD%A7g%F7%F4TDZ%B4%D6%0EP%08k%ED%80%C6%98%A6%94%D0%18%D3%20%22R)!%22%12Ba0%E7%AC%A5d9g%C5%94%D2%B9%940%A5t%C6%18%E3%BE%940%C6%B8Gf%9ET%F5%E9g%AB%AA2%F3%F4%9A%D1c%E6)%84pxT%16B8%5Cc%ACZ%C7%D7%7F%13%E76i%5E%12%B0U%E9%2F%E0%0B%25%CD%9F9%AD7%40%E5%00%00%00%00IEND%AEB%60%82" alt="" /></a>
+                                    <a id="playButton" href="javascript:setGamePause(0)" style="display:none; position:absolute; bottom:5px; right:5px; width:20px; height:20px; display:block;"><img style="border:none;" src="data:image/png,%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%14%00%00%00%14%08%06%00%00%00%8D%89%1D%0D%00%00%00%01sRGB%00%AE%CE%1C%E9%00%00%00%06bKGD%00%3B%00%3B%00%3B%B6%87%D1%BD%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%9A%9C%18%00%00%00%07tIME%07%DA%0B%07%0C%11%23m%D27G%00%00%00%19tEXtComment%00Created%20with%20GIMPW%81%0E%17%00%00%01%16IDAT8%CB%B5%D5%3D%8A%840%14%07%F0%E7%7BU%20%95%20%E4%1A%1Ea%16%A6%B1%CA)v%0F%20x%08%C1%03%B8%A7%B0J3%A0G%F0%1A%82%60%15H%F5%E2V3%C8%A2f%5D%9D%7F%17H~%BC%7CG%B0%91%A6inR%CAR%08%91%12%11%CD%F3%0C%DE%7Bv%CE%F5%D6%DABk%DD%AD%8D%8B%D6%A0%24I%1EDD%B0%13f%E6q%1C%EF%BFa%5C6%8C1%B5R%AA%0Da%00%00DDJ%A9%D6%18S%AFVh%8C%A9%E38%FE%84%7Fd%9A%A6%EF%2C%CB%BE%5E%60%D347%A5T%0B'2%0C%C3%87%D6%BAC%00%80%24I%1E%7B%9D%F3%3C%0F%82O%23%0AU%B7%C4%AA%AA%0AV%89R%CA%F2%AF%D3%0AU*%A5%2CQ%08%91%1EY%AB%3DT%08%91%22%22%D2%D1%0D%D8B%11%91%10.%0Ez%EF%F9*%CC%7B%CF%E8%9C%EB%8F%0E%DC%DAm%E7%5C%8F%D6%DA%E2%0A%0C%00%C0Z%5B%A0%D6%BAcf%3E%8B13%BFn%CA8%8E%F7%10%12%3A%D4O%E3%3D%8F%C3%19t%89%BD%E5%81%8D%AE%FE%02~%00l%2B%A7%F8%92m%AC%D2%00%00%00%00IEND%AEB%60%82" alt="" /></a>
+                                    
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        
+                        <div id="tdNote">
+                            You'll have to build a tower first. Try building a Cannon Tower.
+                        </div>
+                        <div id="tdHighscores" style="position:relative;"><div id="tdHighscoresLoad">Loading highscores, please wait.</div>
+                            <table id="tdHighscoresSubmit" width=100% cellpadding=4 cellspacing=0 border=0 style="margin-top:15px;">
+                                <tr>
+                                    <td style="text-align:center;"><input id="tdPlayerName" type="text" name="player_name" value="Player" style="font-family:Tahoma; font-size:12px; padding:5px; width:190px; background-color:#b2bccd; border:none;" /></td>
+                                    <td style="padding-right:20px;"><a id="tdSubmitScoresButton" href="javascript:submitScore();" style="display:block; color:white; background-color:#4da75c; padding:5px; text-align:center; font-family:Tahoma; border-radius:5px; -moz-border-radius:5px; text-decoration:none; font-size:14px; margin-bottom:2px;">Submit score</a></td>
+                                </tr>
+                            </table>
+                            <table width=400 cellpadding=4 cellspacing=0 border=0 style="margin-top:5px; position:absolute; bottom:10px; left:15px;">
+                                <tr>
+                                    <td><a id="highscoreMenuButton" href="javascript:showMenu();" style="display:block; color:white; background-color:#39619d; padding:7px; text-align:center; border-radius:5px; -moz-border-radius:5px; text-decoration:none; font-size:14px; margin-bottom:2px;">Menu</a></td>
+                                    <td><a id="highscoreRetryButton" href="javascript:retryFunction();" style="display:block; color:white; background-color:#39619d; padding:7px; text-align:center; border-radius:5px; -moz-border-radius:5px; text-decoration:none; font-size:14px; margin-bottom:2px;">Give it another try</a></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div></div>
+                <div style="float:left; width:130px; padding-top:13px;"><script type="text/javascript" src="https://www.reddit.com/static/button/button1.js"></script></div>
+                    <div>
+                                <div style="width:400px; float:left; padding-top:10px; text-align:left;">
+            <script src="https://connect.facebook.net/en_US/all.js#xfbml=1"></script><fb:like href="https://pivotfinland.com/frozendefence2/"></fb:like>    
+            <br /><br />
+    <h2>Works best on Google Chrome.</h2><br />
+        </div>
+                    </div>
+            </div>
+            <div style="float:left; margin-left:10px;">
+                <script type="text/javascript"><!--
+                google_ad_client = "ca-pub-0627711450592334";
+                /* FrozenDefence_Leve�torni */
+                google_ad_slot = "6618017086";
+                google_ad_width = 160;
+                google_ad_height = 600;
+                //-->
+                </script>
+                <script type="text/javascript"
+                src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+                </script>
+            </div><style>#td { float:left; } #tdWrapper { width:1000px;}</style>
+        </div>
+        <div id="loadImages">
+            <img src="frozendefence_arcade.png" alt="" />
+            <img src="frozendefence_campaign.png" alt="" />
+            <img src="frozendefence_perfectsetup.png" alt="" />
+            <img src="frozendefence_bg.png" alt="" />
+            <img src="frozendefence_bg2.png" alt="" />
+            <img id="tdImageNuke" src="data:image/png,%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%1F%00%00%00%1F%08%06%00%00%00%1F%AE%169%00%00%00%01sRGB%00%AE%CE%1C%E9%00%00%00%06bKGD%00%FF%00%FF%00%FF%A0%BD%A7%93%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%9A%9C%18%00%00%00%07tIME%07%DA%0B%06%149%04%3F%0C%B9%2B%00%00%00%19tEXtComment%00Created%20with%20GIMPW%81%0E%17%00%00%02OIDATH%C7%ED%97Ok%D4%40%18%87%9F%99L6%E9%D6uS%A1K%5B%DB%E2%A5%E8Ez%F4%03(x%F3%D0%8B%60%15T%D0%A3%08z%F0%20%F8%01%F4%3Bx%A9%8A%E8A%2Cx%F2%24(%9E%84%15A%2F%85%DA%20BEw%B3k%DB4%C9%CCxH%BBH-%ED%EA%A6%16%AC%3F%18%C8%9FI%9E%99w%DE%DF%BC%09%ECU%89%9FO%9EON%DA%9D%06%9E%A8%D7%C5%2F%F0%BF%01%DE8%00%B9%9Ba%FF%0F%DF%15%A9n%3B%F6M7%D0%A1%8B%F9%A6%C8%DE%F9%BF%7D%BF'%B8%3F%D5B%7Fr%91C%19vY%10%9D%1F%CBC7%94%E2%1D%FF%8E%7F%3A%22%7B%EB%23k%196%96%B4%AE%8C%F4%08%97%96%E0%5E%88%0E%5D%E2g%15%FCS%AD%DC%9F%AE%60%E0%E9%3CKw%06%E9%BF%FE%05%1C%20%168%13%09%C27D%97%0E%22k)f%D1%FD%F35%17%15C%FCd%3Fj%22A%1DY%05-%F2%E1%96%2C8%B0%EF%C6%1A8%CB%AF%89%B2a%E5a%40%F9r%03ut%B5%B7%84%B3%91C%FA%BA%8CYT9%7C%AD%B7%10y%EB%1C%BB%20%1C%C8%DE%7B%F4ME%A8%C9%15%F4%BC%DB%7B%B6%EB%8F%25%EC%8A%80L%20J%B6%03%DD(%13I%D4%E1U%F0%2Cz%A1%84%9E%F3%8A%B1Z%EB%EA%08%C2%DBz%F7%95U%03%0AlK%D2%BE6%5C%AC%CF%CDWg%FB*%25%A09%3D%5E%F0%26%A3%2C%22%D0%DBv%B3%19%0C%CC%CE%17%08W%96%E0%C1%02%C2%E9%E2m%16H%05%C1LX%00%7C%CD%E7%EB%60%9Bl%9Em%D6%E4%0D%40%7FV%24%2F%FA%91%B5%B47%B8%A8%18%E2GUL%D3!%7D%E3w%D6%DDn%C8%3D!!%FB%90g%B7%3C%A01mY%8C%CF%E3%C7U%A2%8B%A3%B4o%0E%E1%0Cg%98%B6%EC%CC%D64%24%D9%5C%09%00g8%25%AD%F7!%7C%8Bw%B2%5D%8C%CF%D7U%BD%1B%92%D6%7DD%D9%40%06%CDs%A34%A7%C7%91%03%9Al%AE%84%F0%2C%EAPB%F2%AA%8C%0E%DD%AE%7C%DEua%89.%8C%11%CC%84%C4%8F%AA%C4%B3%15l%23%7F%B4yv%0C%FFL%13%A1%2C%EE%B1e%96n%0F%16_R%01%DA%B7j%9B%CE(%BE%1F%00%90%BC%2C%EF%DC%C7%C4v%A1%EC%26%D4%5D%C3%1D%D7e'%B5%25%5C%A7%E9%EE%C1%FF%E9%3F%96%BD%AB%1F%CFz%E4L%20'%2Bm%00%00%00%00IEND%AEB%60%82" />
+            <img id="tdImageHeart" src="heart.png" />
+            <img id="tdImageNotAllowed" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAAAfCAYAAAAfrhY5AAAAAXNSR0IArs4c6QAAAAZiS0dEAGEAtQDK5TXy1wAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9oLAw8AKsrzhf0AAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAAVklEQVRIx+3SoQHAIBAEwQVHlV8TJVBdLC6SuCQOx5s9eWbNlKv31SL47x6DE1+Zc66McIugZoWBL346/MYzwgA1Kyw4wQlOcIITnOAEJzjBCU5w2+8BCqRVjnCSFrkAAAAASUVORK5CYII=" />
+            <img id="tdImageBlack" src="blackify.png" alt="" />
+            <img id="tdImageCoin32" src="coin32.png" />
+            <img id="tdImageCoin64" src="coin64.png" />
+            <img src="tower1.png" />
+            <img src="tower2.png" />
+            <img src="tower3.png" />
+            <img src="tower4.png" />
+            <img src="tower5.png" />
+            <img src="tower6.png" />
+            <img src="blackify.png" />
+        </div>
+        <script type="application/javascript">
+            everythingIsOk = 0;
+            
+            function checkIfOkOne() {
+                if (everythingIsOk != 1) { document.getElementById('tdTextSpan').innerHTML = 'ERROR! Javascript loading error 1'; }
+            }
+            setTimeout(checkIfOkOne,3000);
+            
+        </script>
+        <script language="javascript" type="application/javascript" src="frozendefence.min.js"></script>
+        
+
+        
+    </center>
+    
+<script src="https://www.google-analytics.com/urchin.js" type="text/javascript"> 
+</script> 
+<script type="text/javascript"> 
+_uacct = "UA-2908708-1";
+urchinTracker();
+</script> 
+
+</body>
+</html>
