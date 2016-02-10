@@ -11,3 +11,5 @@
   http://www.html5rocks.com/en/tutorials/casestudies/onslaught/#toc-the-game-loop
   http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/
   https://css-tricks.com/using-requestanimationframe/
+  http://browsenpm.org/package.json
+  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes

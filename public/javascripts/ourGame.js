@@ -106,7 +106,6 @@ var render = function () {
 	ctx.fillText("Goblins caught: " + monstersCaught, 32, 32);
 };
 
-
 // The main game loop
 var main = function () {
 	var now = Date.now();
@@ -121,7 +120,7 @@ var main = function () {
 	requestAnimationFrame(main);
 };
 
-// Vendorprefixes - Cross-browser support for requestAnimationFrame
+// Cross-browser support for requestAnimationFrame
 var w = window;
 requestAnimationFrame = w.requestAnimationFrame || w.webkitRequestAnimationFrame || w.msRequestAnimationFrame || w.mozRequestAnimationFrame;
 
