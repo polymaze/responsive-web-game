@@ -3,3 +3,25 @@ https://github.com/polymaze/responsive-web-game.git
 
 http://www.html5rocks.com/en/tutorials/canvas/notearsgame/
 https://github.com/tzuryby/jquery.hotkeys
+
+/**** GitHub ****/
+
+<div>
+  <a href="https://github.com/polymaze/responsive-web-game.git">https://github.com/polymaze/responsive-web-game.git</a>
+</div>
+
+/**** Canvas ****/
+
+<canvas id='ourGame' width="100px" height="100px">This game requires Canvas support. Please install 
+    <a href="http://www.google.com/chrome?hl=fi" style="color:white;">Google Chrome</a> (it's free!) to play this game.</canvas>
+
+/**** Sources & Thanks ****/
+ 
+  https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/getContext
+  http://h3manth.com/content/html5-canvas-full-screen-and-full-page
+  http://www.lostdecadegames.com/how-to-make-a-simple-html5-canvas-game/
+  http://www.html5rocks.com/en/tutorials/casestudies/onslaught/#toc-the-game-loop
+  http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/
+  https://css-tricks.com/using-requestanimationframe/
+  http://browsenpm.org/package.json
+  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
