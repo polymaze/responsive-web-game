@@ -26,8 +26,7 @@ var bgImage = new Image();
 bgImage.onload = function () {
 	bgReady = true;
 };
-bgImage.src = "images/background.png";
-
+bgImage.src = "http://www.psdgraphics.com/file/abstract-mosaic-background.png";
 
 // Ship image
 var shipReady = false;
@@ -50,7 +49,6 @@ cometImage.src = "images/comet.svg";
 var ship = {
 	speed: 256 // movement in pixels per second
 };
-
 var comet = {};
 var cometsCollected = 0;
 
@@ -93,7 +91,7 @@ var update = function (modifier) {
 		ship.x += ship.speed * modifier;
 	}
 
-	// Are they touching?
+	// Collision Detection
 	if (
 		ship.x <= (comet.x + 32)
 		&& comet.x <= (ship.x + 32)
