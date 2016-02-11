@@ -1,12 +1,8 @@
 
-document.body.onload = ourGameLoader;
-
-function ourGameLoader() {
-
 // Create the canvas
 var canvas = document.createElement("canvas");
 var ctx = canvas.getContext("2d");
-canvas.id = 'ourGameCanvas';
+canvas.id = 'ourGame';
 canvas.width = 512;
 canvas.height = 480;
 document.body.appendChild(canvas);
@@ -14,14 +10,14 @@ document.body.appendChild(canvas);
 
 // Make it big
 function fullscreen(){
-var screen = document.getElementById('ourGameCanvas');
+var screen = document.getElementById('ourGame');
    if(screen.webkitRequestFullScreen) {
        screen.webkitRequestFullScreen();
    } else {
      screen.mozRequestFullScreen();
   }
 }
-document.getElementById('ourGameCanvas').addEventListener("click",fullscreen);
+document.getElementById('ourGame').addEventListener("click",fullscreen);
 
 
 // Background image
@@ -155,5 +151,3 @@ requestAnimationFrame = w.requestAnimationFrame || w.webkitRequestAnimationFrame
 var then = Date.now();
 reset();
 main();
-	
-} // ourGame()
