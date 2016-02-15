@@ -9,6 +9,7 @@ div.style.background = "red";
 div.id = 'ourGame';
 document.body.appendChild(div);
 
+
 // Create the ourGame canvas layers
 /*
   Create these inside #ourGame
@@ -17,23 +18,19 @@ document.body.appendChild(div);
 var canvaslayers = ["background","player"];
 var canvaslayerslength = canvaslayers.length;
 
-for (var i = 0; i < canvaslayerslength; i++) {
+for (var layer = 0; layer < canvaslayerslength; layer++) {
   // alert(canvaslayers[i]);
 
-  // Canvas Settings
-  var canvasId = function() {
-    // Grab these from canvaslayers array
-  };
-  var screen = function(height, width) {
-    screen.height = 420;
-    screen.width = 512;
-  };
+  // Identify the canvas
+  /* Make this pull from the canvaslayer array */
+  var canvasId;
 
   // Create the canvas
   var canvas = document.createElement("canvas");
   var ctx = canvas.getContext("2d");
-  canvas.id = "ourGameCanvas";
+  div = document.getElementById("ourGame");
+  canvas.id = canvasId;
   canvas.height = screen.height;
   canvas.width = screen.width;
-  document.body.appendChild(canvas);
+  div.appendChild(canvas);
 }
