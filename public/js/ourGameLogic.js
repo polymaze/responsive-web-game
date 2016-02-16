@@ -15,21 +15,22 @@ document.body.appendChild(div);
   Create these inside #ourGame
   Link layer names to canvas
 */
-var canvaslayers = ["background","player"];
-var canvaslayerslength = canvaslayers.length;
+var canvaslayers = ["background", "player", "effects"];
+var canvasId = canvaslayers.length;
 
-for (var layer = 0; layer < canvaslayerslength; layer++) {
-  // alert(canvaslayers[i]);
-
-  // Identify the canvas
-  /* Make this pull from the canvaslayer array */
-  var canvasId;
+for (var layer = 0; layer < canvasId; layer++) {
+  // Tag the canvas elements
+  /*
+    Why is this only logging the background layer?
+  */
+  canvasId = canvaslayers[layer];
 
   // Create the canvas
   var canvas = document.createElement("canvas");
   var ctx = canvas.getContext("2d");
   div = document.getElementById("ourGame");
   canvas.id = canvasId;
+  // http://stackoverflow.com/questions/2242086/how-to-detect-the-screen-resolution-with-javascript
   canvas.height = screen.height;
   canvas.width = screen.width;
   div.appendChild(canvas);
