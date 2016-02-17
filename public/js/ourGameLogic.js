@@ -1,5 +1,5 @@
 
-// Create the div "ourGame"
+// Create the main game div
 var div = document.createElement("div");
 div.style.width = "100px";
 div.style.height = "100px";
@@ -11,18 +11,10 @@ document.body.appendChild(div);
 
 
 // Create the ourGame canvas layers
-/*
-  Create these inside #ourGame
-  Link layer names to canvas
-*/
-var canvasLayers = ["background", "player", "effects"];
-var canvasLayer = canvasLayers.length;
+var canvasLayers = ["background", "player"];
 
-for (var i = 0; i < canvasLayer; i++) {
+for (var i = 0; i < canvasLayers.length; i++) {
   // Tag the canvas elements
-  /*
-    Why is this only logging the background layer?
-  */
   var canvasId = canvasLayers[i];
 
   // Create the canvas
