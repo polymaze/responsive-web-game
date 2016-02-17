@@ -17,7 +17,9 @@ https://github.com/tzuryby/jquery.hotkeys
     <a href="http://www.google.com/chrome?hl=fi" style="color:white;">Google Chrome</a> (it's free!) to play this game.</canvas>
 
 /**** Sources & Thanks ****/
- 
+  
+  http://stackoverflow.com/questions/4873832/make-a-div-fill-up-the-remaining-width
+  www.lostdecadegames.com/how-to-make-a-simple-html5-canvas-game/
   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide#Array_Object
   http://www.piskelapp.com/
   https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/getContext
@@ -30,4 +32,13 @@ https://github.com/tzuryby/jquery.hotkeys
   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
   http://www.gitguys.com/topics/adding-and-removing-remote-branches/
   http://stackoverflow.com/questions/9152224/add-canvas-to-a-page-with-javascript
-  
+  http://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_canvas_createpattern
+  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
+  https://en.m.wikipedia.org/wiki/Magic_number_(programming)
+  http://stackoverflow.com/questions/9212902/how-to-generate-circle-using-javascript
+  http://billmill.org/static/canvastutorial/ball.html
+  http://www.html5rocks.com/en/tutorials/canvas/notearsgame/
+  https://h3manth.com/demo/canvas/full-screen.html
+  https://h3manth.com/content/html5-canvas-full-screen-and-full-page
+  http://www.gitguys.com/topics/adding-and-removing-remote-branches/
+  http://stackoverflow.com/questions/7480496/javascript-getelementbyclass

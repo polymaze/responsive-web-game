@@ -2,29 +2,41 @@
 html, 
 body {
   height: 100%;
-  margin: 0
+  margin: 0;
 }
 
 .container {
   display: flex;
   flex-flow: column;
-  height: 100%
+  height: 100%;
 }
 
 .container .row {
-  border: 1px dotted grey;
-  flex: 0 1 30px
+  flex: 0 1 30px;
 }
 
-.container .row.header {
-  flex: 0 1 auto
+.container .row {
+  flex: 0 1 auto;
 }
+
+.container header {
+  background-color: black;
+  color: white;
+  padding-left: 2%;
+} 
 
 #ourGame {
-  flex: 1 1 auto
+  flex: .9 0 auto;
 }
 
-.container .row.footer {
-    flex: 0 1 40px;
+/*
+#scoreboard {
+  flex: 1 1 auto;
+}
+*/
+
+.container footer {
+  flex: 0 2 40px;
+  background-color: gray;
 }
 
