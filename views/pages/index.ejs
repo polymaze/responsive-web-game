@@ -1,26 +1,43 @@
 <!DOCTYPE html>
 <!--
-    Hello and welcome!
-    
-    Thanks for taking a look under the hood of this game.
-    
-    Please feel free to look around and make modifications, 
-      or submit a branch on github:
-      https://github.com/polymaze/responsive-web-game
+  Hello and welcome!
+
+  Thanks for taking a look under the hood of this game.
+
+  Please feel free to look around and make modifications, 
+    or submit a branch on github:
+    https://github.com/polymaze/responsive-web-game
 -->
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>Responsive Web Game</title>
-        <link rel="stylesheet" href="css/main.css" type="text/css"/>
-    </head>
-    
-    <body>
-        <h1>Responsive Web Game</h1>
-        <p class="tagline"></p>
-        
-        <!-- load scripts -->
-        <script src="js/main.js"></script>
-        <script src="js/ourGameLogic.js"></script>
-    </body>
+  <head>
+    <meta charset="utf-8" />
+    <title>Responsive Web Game</title>
+    <link rel="stylesheet" href="css/resetBoilerplate.css" type="text/css"/>
+    <link rel="stylesheet" href="css/main.css" type="text/css"/>
+    <link rel="stylesheet" href="css/ourGameStyle.css" type="text/css"/>
+  </head>
+
+  <body>
+    <div class="container" role="main">
+      <header class="row">
+          <h1 class="logo" role="main">Responsive Web Game</h1>
+          <p class="tagline"></p>
+      </header>
+      
+      <!-- Add from ourGameLogic.js -->
+      <section class="ourGame"></section>
+      
+      <section class="scoreboard">
+        <p>Scoreboard</p>
+      </section>
+      
+      <footer>
+        <p class="closing"></p>
+      </footer>
+
+      <!-- load scripts -->
+      <script src="js/main.js"></script>
+      <script src="js/ourGameLogic.js"></script>
+    </div><!-- .container {main} -->
+  </body>
 </html>
