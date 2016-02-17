@@ -23,7 +23,7 @@ for (var i = 0; i < canvasLayer; i++) {
   /*
     Why is this only logging the background layer?
   */
-  var canvasId = canvasLayer[i];
+  var canvasId = canvasLayers[i];
 
   // Create the canvas
   var canvas = document.createElement("canvas");
