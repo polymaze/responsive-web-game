@@ -1,5 +1,9 @@
 Github.com -> Create new repository, initiate repository with readme.txt
 
+* c9 *
+openFile = c9 filename.doctype
+install c9 manually = npm install -g c9
+
 * Windows *
 dir = list directory files
 cd MY_PROJECT

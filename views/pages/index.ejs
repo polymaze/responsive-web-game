@@ -7,6 +7,10 @@
   Please feel free to look around and make modifications, 
     or submit a branch on github:
     https://github.com/polymaze/responsive-web-game
+    
+  /* Nightly Build */
+  https://dry-crag-41809.herokuapp.com/
+  https://github.com/polymaze/responsive-web-game/tree/nightly
 -->
 <html lang="en">
   <head>
@@ -18,22 +22,42 @@
   </head>
 
   <body>
-    <div class="container" role="main">
-      <header class="row">
+    <div class="container main">
+      <header class="main row">
           <h1 class="logo" role="main">Responsive Web Game</h1>
           <p class="tagline"></p>
-      </header><!-- .row {main} -->
+      </header><!-- .main .row -->
       
-      <section id="ourGame" class="row"></section><!-- #ourGame .row -->
+      <section id="ourGame" class="row">
+        <!-- Provide a fallback -->
+        <!-- Add our game here -->
+        
+      </section><!-- #ourGame .row -->
       
-      <footer class="row" role="main">
-        <section class="scoreboard" class="row"></section><!-- #scoreboard .row -->
+      <section class="scoreboard" class="row">
+        <h2>Scoreboard</h2>
+        <p>Load scores here...</p>
+        <p>Load scores here...</p>
+        <p>Load scores here...</p>
+        <p>Load scores here...</p>
+        <p>Load scores here...</p>
+        <p>Load scores here...</p>
+        <p>Load scores here...</p>
+        <p>Load scores here...</p>
+        <p>Load scores here...</p>
+        <p>Load scores here...</p>
+        <p>Load scores here...</p>
+        <p>Load scores here...</p>
+        <p>Load scores here...</p>
+      </section><!-- #scoreboard .row -->
+      
+      <footer class="main row">
         <p class="closing"></p>
-      </footer><!-- .row {main} -->
+      </footer><!-- .main .row -->
 
       <!-- load scripts -->
       <script src="js/main.js"></script>
       <script src="js/ourGameLogic.js"></script>
-    </div><!-- .container {main} -->
+    </div><!-- .container .main -->
   </body>
 </html>

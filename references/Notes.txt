@@ -18,6 +18,8 @@ https://github.com/tzuryby/jquery.hotkeys
 
 /**** Sources & Thanks ****/
   
+  https://developer.mozilla.org/en-US/docs/Web/CSS/flex-flow
+  https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes
   http://stackoverflow.com/questions/4873832/make-a-div-fill-up-the-remaining-width
   www.lostdecadegames.com/how-to-make-a-simple-html5-canvas-game/
   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide#Array_Object
