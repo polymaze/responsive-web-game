@@ -70,6 +70,7 @@ shipImage.onload = function () {
 };
 shipImage.src = "images/ship.svg";
 
+
 // Comet image
 var cometReady = false;
 var cometImage = new Image();
@@ -106,7 +107,7 @@ addEventListener("keyup", function (e) {
 
 
 // Reset the game when the player catches a comet
-/* Make this not respawn player in center
+/* !Make this not respawn player in center
    Make this not respawn comet near or on player
 */
 var reset = function () {
