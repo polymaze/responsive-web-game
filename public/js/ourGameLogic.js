@@ -59,7 +59,7 @@ var bgImage = new Image();
 bgImage.onload = function () {
 	bgReady = true;
 };
-bgImage.src = ""; // "http://www.psdgraphics.com/file/abstract-mosaic-background.png";
+bgImage.src = "http://www.psdgraphics.com/file/abstract-mosaic-background.png";
 
 
 // Ship image
