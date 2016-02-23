@@ -2,13 +2,3 @@
     var tagline = document.querySelector("p.tagline");
     tagline.innerText = "This the tagline.";
 }); */
-
-$(document).ready(function() {
-	
-	// Preloader
-	setTimeout(function(){
-		$('body').addClass('loaded');
-		// $('h1').css('color','#222222');
-	}, 0);
-	
-});
