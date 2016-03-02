@@ -27,7 +27,7 @@ if (document.readyState == "complete" || document.readyState == "loaded") {
   var ctx = newCanvas.getContext("2d");
   newCanvas.id = 'ourGameCanvas';
   newCanvas.width = 512;
-  newCanvas.height 488;
+  newCanvas.height = s488;
   document.body.appendChild(newCanvas);
   
   // Get game rules (mode)
