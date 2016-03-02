@@ -1,9 +1,9 @@
 /* document.addEventListener("DOMContentLoaded", function () {
     var tagline = document.querySelector("p.tagline");
-    tagline.innerText = "This the tagline.";
+    tagline.innerText = "This is the tagline.";
 }); */
 
-$(document).ready(function() {
+/* $(document).ready(function() {
 	
 	// Preloader
 	setTimeout(function(){
@@ -11,4 +11,4 @@ $(document).ready(function() {
 		// $('h1').css('color','#222222');
 	}, 3000);
 	
-});
+}); */
