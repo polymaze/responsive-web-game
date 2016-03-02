@@ -23,12 +23,12 @@ if (document.readyState == "complete" || document.readyState == "loaded") {
   document.body.appendChild(newSection);
   
   // Create canvas elements
-  var newCanvas = document.createElement("canvas");
-  var ctx = newCanvas.getContext("2d");
-  newCanvas.id = 'ourGameCanvas';
-  newCanvas.width = 512;
-  newCanvas.height = 488;
-  document.body.appendChild(newCanvas);
+  var canvas = document.createElement("canvas");
+  var ctx = canvas.getContext("2d");
+  canvas.id = 'ourGameCanvas';
+  canvas.width = 512;
+  canvas.height = 480;
+  document.body.appendChild(canvas);
   
   // Get game rules (mode)
 
